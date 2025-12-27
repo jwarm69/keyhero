@@ -1,7 +1,7 @@
 // Chart generator for creating note charts at different difficulty levels
 // Generates Easy, Medium, and Hard charts based on BPM and duration
 
-import type { NoteChart, Note, Difficulty } from '../types.js';
+import type { NoteChart, Difficulty } from '../types.js';
 
 export interface ChartGeneratorConfig {
   bpm: number;

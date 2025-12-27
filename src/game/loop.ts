@@ -102,7 +102,6 @@ export class GameLoop {
 
     if (note && !note.hit) {
       const result = this.scoring.evaluateHit(note, songTime);
-      const previousCombo = this.gameState.getCombo();
       this.gameState.processHit(result);
       note.hit = true;
       this.showFeedback(result.rating);

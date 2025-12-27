@@ -8,7 +8,7 @@ import { GameLoop } from './game/loop.js';
 import { EndScreen } from './ui/endScreen.js';
 import { SongSelectScreen } from './ui/songSelect.js';
 import { DifficultySelectScreen } from './ui/difficultySelect.js';
-import type { Difficulty, GameConfig, NoteChart } from './types.js';
+import type { GameConfig } from './types.js';
 import { getSongById, getChart } from './game/songMetadata.js';
 
 // Game state machine
@@ -225,16 +225,15 @@ class KeyHeroGame {
     
     try {
       // Try to load audio file, fall back to procedural if it fails
-      let useProceduralAudio = false;
-      
+
       try {
         // Create audio context first
         this.audioEngine.stop();
         await this.audioEngine.start();
-        
+
         const audioContext = this.audioEngine.getAudioContext();
         if (!audioContext) throw new Error('AudioContext not available');
-        
+
         // Try to load audio file
         const progressEl = document.getElementById('loading-progress');
         const audioBuffer = await audioLoader.loadAudioFile(
@@ -249,10 +248,10 @@ class KeyHeroGame {
         
         // Update audio engine with loaded buffer
         (this.audioEngine as any).musicBuffer = audioBuffer;
-        useProceduralAudio = false;
+        console.log('Using file audio');
       } catch (error) {
         console.warn('Failed to load audio file, using procedural audio:', error);
-        useProceduralAudio = true;
+        console.log('Using procedural audio');
         
         // Restart with procedural audio
         this.audioEngine.stop();

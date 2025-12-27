@@ -8,7 +8,6 @@ export class DifficultySelectScreen {
   private overlay: HTMLDivElement | null = null;
   private onSelectCallback: ((difficulty: Difficulty) => void) | null = null;
   private onBackCallback: (() => void) | null = null;
-  private currentSongId: string | null = null;
 
   constructor() {
     this.createOverlay();
@@ -46,7 +45,6 @@ export class DifficultySelectScreen {
   show(songId: string): void {
     if (!this.overlay) return;
 
-    this.currentSongId = songId;
     const song = getSongById(songId);
     if (!song) return;
 

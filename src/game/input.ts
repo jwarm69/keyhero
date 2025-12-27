@@ -3,6 +3,7 @@ export interface InputHandler {
   onKeyUp(key: string): void;
   getHeldKeys(): Set<string>;
   getLane(key: string): number | undefined;
+  isKeyPressed(key: string): boolean;
 }
 
 export class KeyboardInput implements InputHandler {

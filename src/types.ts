@@ -45,3 +45,21 @@ export interface SongMetadata {
     hard: NoteChart;
   };
 }
+
+export interface GameStats {
+  score: number;
+  maxCombo: number;
+  perfectCount: number;
+  goodCount: number;
+  missCount: number;
+}
+
+export interface LeaderboardEntry {
+  playerName: string;
+  score: number;
+  maxCombo: number;
+  perfectCount: number;
+  goodCount: number;
+  missCount: number;
+  timestamp: number;
+}
