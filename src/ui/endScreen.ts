@@ -5,7 +5,7 @@ import type { GameStats } from '../game/scoring.js';
 
 export class EndScreen {
   private overlay: HTMLDivElement | null = null;
-  private restartCallback: (() => void) | null = null;
+  private menuCallback: (() => void) | null = null;
 
   constructor() {
     this.createOverlay();
@@ -133,7 +133,7 @@ export class EndScreen {
            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 5px 20px rgba(102, 126, 234, 0.4)';"
            onmousedown="this.style.transform='scale(0.98)';"
            onmouseup="this.style.transform='scale(1.05)';">
-          Play Again
+          Back to Menu
         </button>
       </div>
     `;
@@ -141,12 +141,12 @@ export class EndScreen {
     // Show overlay
     this.overlay.style.display = 'flex';
 
-    // Attach restart button handler
-    const restartButton = document.getElementById('restart-button');
-    if (restartButton && this.restartCallback) {
-      restartButton.addEventListener('click', () => {
-        if (this.restartCallback) {
-          this.restartCallback();
+    // Attach menu button handler
+    const menuButton = document.getElementById('restart-button');
+    if (menuButton && this.menuCallback) {
+      menuButton.addEventListener('click', () => {
+        if (this.menuCallback) {
+          this.menuCallback();
         }
       });
     }
@@ -162,10 +162,10 @@ export class EndScreen {
   }
 
   /**
-   * Register a callback for restart button
+   * Register a callback for menu button
    */
-  onRestart(callback: () => void): void {
-    this.restartCallback = callback;
+  onMenu(callback: () => void): void {
+    this.menuCallback = callback;
   }
 
   /**

@@ -167,12 +167,8 @@ class KeyHeroGame {
     });
     
     // End screen
-    this.endScreen.onRestart(() => {
-      if (this.gameConfig) {
-        this.startGameplay(); // Restart with same song/difficulty
-      } else {
-        this.showSongSelect();
-      }
+    this.endScreen.onMenu(() => {
+      this.showSongSelect();
     });
   }
   
