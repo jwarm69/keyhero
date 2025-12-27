@@ -1,0 +1,53 @@
+// Song 3 - Easy difficulty chart (BPM: 140, Duration: 90s)
+
+import type { NoteChart } from '../../types.js';
+
+export const SONG3_EASY: NoteChart = [
+  // Simple pattern for fast BPM
+  { lane: 0, hitTime: 2.0 },
+  { lane: 1, hitTime: 4.0 },
+  { lane: 2, hitTime: 6.0 },
+  { lane: 3, hitTime: 8.0 },
+  { lane: 0, hitTime: 10.0 },
+  { lane: 2, hitTime: 12.0 },
+  { lane: 1, hitTime: 14.0 },
+  { lane: 3, hitTime: 16.0 },
+  { lane: 0, hitTime: 18.0 },
+  { lane: 1, hitTime: 20.0 },
+  { lane: 2, hitTime: 22.0 },
+  { lane: 3, hitTime: 24.0 },
+  { lane: 1, hitTime: 26.0 },
+  { lane: 2, hitTime: 28.0 },
+  { lane: 0, hitTime: 30.0 },
+  { lane: 3, hitTime: 32.0 },
+  { lane: 1, hitTime: 34.0 },
+  { lane: 2, hitTime: 36.0 },
+  { lane: 0, hitTime: 38.0 },
+  { lane: 3, hitTime: 40.0 },
+  { lane: 2, hitTime: 42.0 },
+  { lane: 1, hitTime: 44.0 },
+  { lane: 0, hitTime: 46.0 },
+  { lane: 3, hitTime: 48.0 },
+  { lane: 1, hitTime: 50.0 },
+  { lane: 2, hitTime: 52.0 },
+  { lane: 0, hitTime: 54.0 },
+  { lane: 3, hitTime: 56.0 },
+  { lane: 2, hitTime: 58.0 },
+  { lane: 1, hitTime: 60.0 },
+  { lane: 0, hitTime: 62.0 },
+  { lane: 1, hitTime: 64.0 },
+  { lane: 2, hitTime: 66.0 },
+  { lane: 3, hitTime: 68.0 },
+  { lane: 0, hitTime: 70.0 },
+  { lane: 2, hitTime: 72.0 },
+  { lane: 1, hitTime: 74.0 },
+  { lane: 3, hitTime: 76.0 },
+  { lane: 0, hitTime: 78.0 },
+  { lane: 1, hitTime: 80.0 },
+  { lane: 2, hitTime: 82.0 },
+  { lane: 3, hitTime: 84.0 },
+  { lane: 1, hitTime: 86.0 },
+  { lane: 2, hitTime: 88.0 },
+];
+
+
