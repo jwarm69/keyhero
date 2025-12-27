@@ -47,3 +47,4 @@ export const SONG2_HARD: NoteChart = [
 ];
 
 
+

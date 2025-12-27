@@ -55,3 +55,4 @@ export const SONG2_EASY: NoteChart = [
 ];
 
 
+

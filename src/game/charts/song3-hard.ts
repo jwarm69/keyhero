@@ -23,3 +23,4 @@ export const SONG3_HARD: NoteChart = [
 ];
 
 
+

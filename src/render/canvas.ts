@@ -33,7 +33,18 @@ export class Canvas2DRenderer implements CanvasRenderer {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
     this.laneWidth = this.canvas.width / 4;
-    this.hitLineY = this.canvas.height * 0.8;
+    
+    // Adjust hit line to be above touch controls on mobile
+    // Touch controls are ~120px, so move hit line up a bit more
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isMobile && window.innerHeight < 800) {
+      // On smaller screens, move hit line higher
+      this.hitLineY = this.canvas.height * 0.65;
+    } else if (isMobile) {
+      this.hitLineY = this.canvas.height * 0.7;
+    } else {
+      this.hitLineY = this.canvas.height * 0.8;
+    }
   }
 
   clear(): void {

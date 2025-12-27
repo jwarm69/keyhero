@@ -2,12 +2,13 @@ import { WebAudioEngine } from './audio/audioEngine.js';
 import { SFXEngine } from './audio/sfxEngine.js';
 import { audioLoader } from './audio/audioLoader.js';
 import { Canvas2DRenderer } from './render/canvas.js';
-import { KeyboardInput } from './game/input.js';
+import { MultiInput } from './game/input.js';
 import { RhythmScoring, GameState } from './game/scoring.js';
 import { GameLoop } from './game/loop.js';
 import { EndScreen } from './ui/endScreen.js';
 import { SongSelectScreen } from './ui/songSelect.js';
 import { DifficultySelectScreen } from './ui/difficultySelect.js';
+import { TouchControls } from './ui/touchControls.js';
 import type { GameConfig } from './types.js';
 import { getSongById, getChart } from './game/songMetadata.js';
 
@@ -22,7 +23,7 @@ class KeyHeroGame {
   private audioEngine: WebAudioEngine;
   private sfxEngine: SFXEngine | null = null;
   private renderer: Canvas2DRenderer;
-  private input: KeyboardInput;
+  private input: MultiInput;
   private scoring: RhythmScoring;
   private gameState: GameState;
   private gameLoop: GameLoop | null = null;
@@ -33,6 +34,7 @@ class KeyHeroGame {
   private difficultySelectScreen: DifficultySelectScreen;
   private endScreen: EndScreen;
   private loadingOverlay: HTMLDivElement;
+  private touchControls: TouchControls;
   
   constructor() {
     // Initialize canvas
@@ -44,7 +46,7 @@ class KeyHeroGame {
     // Initialize core systems
     this.audioEngine = new WebAudioEngine();
     this.renderer = new Canvas2DRenderer();
-    this.input = new KeyboardInput();
+    this.input = new MultiInput();
     this.scoring = new RhythmScoring();
     this.gameState = new GameState();
     
@@ -55,15 +57,20 @@ class KeyHeroGame {
     this.startOverlay = this.createStartOverlay();
     this.loadingOverlay = this.createLoadingOverlay();
     
+    // Initialize touch controls
+    this.touchControls = new TouchControls();
+    this.touchControls.autoToggle(); // Show on mobile, hide on desktop
+    
     // Set up UI callbacks
     this.setupUICallbacks();
     
-    // Set up input handlers
+    // Set up input handlers (keyboard + touch)
     this.setupInputHandlers();
     
     // Set up resize handler
     window.addEventListener('resize', () => {
       this.renderer.resize();
+      this.touchControls.updateSize();
     });
   }
   
@@ -173,6 +180,7 @@ class KeyHeroGame {
   }
   
   private setupInputHandlers(): void {
+    // Keyboard input
     window.addEventListener('keydown', (e) => {
       const key = e.key.toLowerCase();
       if (['a', 's', 'd', 'f'].includes(key) && this.currentScreen === 'playing' && this.gameLoop) {
@@ -185,6 +193,39 @@ class KeyHeroGame {
       const key = e.key.toLowerCase();
       if (['a', 's', 'd', 'f'].includes(key) && this.currentScreen === 'playing' && this.gameLoop) {
         this.gameLoop.handleKeyUp(key);
+      }
+    });
+    
+    // Touch input
+    this.touchControls.onTouchStart((lane, touchId) => {
+      if (this.currentScreen === 'playing' && this.gameLoop) {
+        // Notify input system
+        if (this.input.onTouchStart) {
+          this.input.onTouchStart(lane, touchId);
+        }
+        
+        // Trigger hit detection by mapping lane to key
+        const laneKeys = ['a', 's', 'd', 'f'];
+        const key = laneKeys[lane];
+        if (key) {
+          this.gameLoop.handleKeyPress(key);
+        }
+      }
+    });
+    
+    this.touchControls.onTouchEnd((lane, touchId) => {
+      if (this.currentScreen === 'playing' && this.gameLoop) {
+        // Notify input system
+        if (this.input.onTouchEnd) {
+          this.input.onTouchEnd(lane, touchId);
+        }
+        
+        // Trigger release by mapping lane to key
+        const laneKeys = ['a', 's', 'd', 'f'];
+        const key = laneKeys[lane];
+        if (key) {
+          this.gameLoop.handleKeyUp(key);
+        }
       }
     });
   }

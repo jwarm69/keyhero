@@ -15,6 +15,7 @@ A Guitar Hero-style rhythm game built with TypeScript, Vite, and Web Audio API. 
 - 🔊 **Procedural Audio** fallback (no files needed!)
 - ⚡ **Perfect Timing** via Web Audio API
 - 🎮 **Keyboard Controls** (A, S, D, F keys)
+- 📱 **Mobile Touch Support** with multi-touch chords
 - 📊 **Score Tracking** with Perfect/Good/Miss ratings
 - 🔥 **Combo System** with milestone sound effects
 
@@ -51,12 +52,19 @@ Deploy to Vercel + Render in 10 minutes for **$0/month**!
 
 ## 🎯 Controls
 
+### Desktop (Keyboard)
 | Key | Lane |
 |-----|------|
 | A | Lane 1 (left) |
 | S | Lane 2 |
 | D | Lane 3 |
 | F | Lane 4 (right) |
+
+### Mobile (Touch)
+- 🔴 **Tap colored buttons** at bottom of screen
+- 👆 **Multi-touch** enabled for chords
+- 📱 Works on all mobile devices
+- See [MOBILE_SUPPORT.md](MOBILE_SUPPORT.md) for details
 
 ## 🏗️ Architecture
 
@@ -253,5 +261,6 @@ Potential enhancements:
 
 🎮 **Play now:** http://localhost:5173  
 🌐 **Deploy:** Follow [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+
 
 
